@@ -1,0 +1,13 @@
+
+# Uninstall modules so changes will be applied
+npm uninstall dlms-server dlms-base
+
+# Install modules
+cp ../../dlms-server/server/dlms-base-1.0.7.tgz .
+cp ../../dlms-server/server/dlms-server-1.0.7.tgz .
+npm install dlms-base-1.0.7.tgz
+npm install dlms-server-1.0.7.tgz
+
+cd src/ui
+./reimport
+cd ../..
