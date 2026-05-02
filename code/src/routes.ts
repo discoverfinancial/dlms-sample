@@ -1,16 +1,19 @@
 /* tslint:disable */
 /* eslint-disable */
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute, HttpStatusCodeLiteral, TsoaResponse, fetchMiddlewares } from '@tsoa/runtime';
+import type { TsoaRoute } from '@tsoa/runtime';
+import {  fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ServicesController } from './controllers/documentController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ActionController } from './controllers/documentController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { DocumentController } from './controllers/documentController';
-import type { RequestHandler, Router } from 'express';
+import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 const multer = require('multer');
-const upload = multer();
+
+
+
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
@@ -290,489 +293,592 @@ const models: TsoaRoute.Models = {
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
-const validationService = new ValidationService(models);
+const templateService = new ExpressTemplateService(models, {"noImplicitAdditionalProperties":"throw-on-extras","bodyCoercion":true});
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
-export function RegisterRoutes(app: Router) {
+
+
+
+export function RegisterRoutes(app: Router,opts?:{multer?:ReturnType<typeof multer>}) {
+
     // ###########################################################################################################
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
+
+    const upload = opts?.multer ||  multer({"limits":{"fileSize":8388608}});
+
+    
+        const argsServicesController_getProfile: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                email: {"in":"path","name":"email","required":true,"dataType":"string"},
+        };
         app.get('/api/profile/:email',
             ...(fetchMiddlewares<RequestHandler>(ServicesController)),
             ...(fetchMiddlewares<RequestHandler>(ServicesController.prototype.getProfile)),
 
-            function ServicesController_getProfile(request: any, response: any, next: any) {
-            const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-                    email: {"in":"path","name":"email","required":true,"dataType":"string"},
-            };
+            async function ServicesController_getProfile(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args: argsServicesController_getProfile, request, response });
 
                 const controller = new ServicesController();
 
-
-              const promise = controller.getProfile.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              await templateService.apiHandler({
+                methodName: 'getProfile',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsActionController_createDoc: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                id: {"in":"path","name":"id","required":true,"dataType":"string"},
+                body: {"in":"body","name":"body","required":true,"dataType":"any"},
+        };
         app.post('/api/action/:id',
             ...(fetchMiddlewares<RequestHandler>(ActionController)),
             ...(fetchMiddlewares<RequestHandler>(ActionController.prototype.createDoc)),
 
-            function ActionController_createDoc(request: any, response: any, next: any) {
-            const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-                    id: {"in":"path","name":"id","required":true,"dataType":"string"},
-                    body: {"in":"body","name":"body","required":true,"dataType":"any"},
-            };
+            async function ActionController_createDoc(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args: argsActionController_createDoc, request, response });
 
                 const controller = new ActionController();
 
-
-              const promise = controller.createDoc.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              await templateService.apiHandler({
+                methodName: 'createDoc',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsDocumentController_createDoc: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                body: {"in":"body","name":"body","required":true,"ref":"DocumentCreate"},
+        };
         app.post('/api/:docType',
             ...(fetchMiddlewares<RequestHandler>(DocumentController)),
             ...(fetchMiddlewares<RequestHandler>(DocumentController.prototype.createDoc)),
 
-            function DocumentController_createDoc(request: any, response: any, next: any) {
-            const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-                    body: {"in":"body","name":"body","required":true,"ref":"DocumentCreate"},
-            };
+            async function DocumentController_createDoc(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args: argsDocumentController_createDoc, request, response });
 
                 const controller = new DocumentController();
 
-
-              const promise = controller.createDoc.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              await templateService.apiHandler({
+                methodName: 'createDoc',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsDocumentController_getDocs: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                match: {"in":"query","name":"match","dataType":"string"},
+        };
         app.get('/api/:docType',
             ...(fetchMiddlewares<RequestHandler>(DocumentController)),
             ...(fetchMiddlewares<RequestHandler>(DocumentController.prototype.getDocs)),
 
-            function DocumentController_getDocs(request: any, response: any, next: any) {
-            const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-                    match: {"in":"query","name":"match","dataType":"string"},
-            };
+            async function DocumentController_getDocs(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args: argsDocumentController_getDocs, request, response });
 
                 const controller = new DocumentController();
 
-
-              const promise = controller.getDocs.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              await templateService.apiHandler({
+                methodName: 'getDocs',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsDocumentController_getDoc: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                id: {"in":"path","name":"id","required":true,"dataType":"string"},
+        };
         app.get('/api/:docType/:id',
             ...(fetchMiddlewares<RequestHandler>(DocumentController)),
             ...(fetchMiddlewares<RequestHandler>(DocumentController.prototype.getDoc)),
 
-            function DocumentController_getDoc(request: any, response: any, next: any) {
-            const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-                    id: {"in":"path","name":"id","required":true,"dataType":"string"},
-            };
+            async function DocumentController_getDoc(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args: argsDocumentController_getDoc, request, response });
 
                 const controller = new DocumentController();
 
-
-              const promise = controller.getDoc.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              await templateService.apiHandler({
+                methodName: 'getDoc',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsDocumentController_cloneDoc: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                id: {"in":"path","name":"id","required":true,"dataType":"string"},
+        };
         app.get('/api/:docType/:id/copy',
             ...(fetchMiddlewares<RequestHandler>(DocumentController)),
             ...(fetchMiddlewares<RequestHandler>(DocumentController.prototype.cloneDoc)),
 
-            function DocumentController_cloneDoc(request: any, response: any, next: any) {
-            const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-                    id: {"in":"path","name":"id","required":true,"dataType":"string"},
-            };
+            async function DocumentController_cloneDoc(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args: argsDocumentController_cloneDoc, request, response });
 
                 const controller = new DocumentController();
 
-
-              const promise = controller.cloneDoc.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              await templateService.apiHandler({
+                methodName: 'cloneDoc',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsDocumentController_copyDoc: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                id: {"in":"path","name":"id","required":true,"dataType":"string"},
+                args: {"in":"body","name":"args","required":true,"ref":"DocumentUpdate"},
+        };
         app.post('/api/:docType/:id/copy',
             ...(fetchMiddlewares<RequestHandler>(DocumentController)),
             ...(fetchMiddlewares<RequestHandler>(DocumentController.prototype.copyDoc)),
 
-            function DocumentController_copyDoc(request: any, response: any, next: any) {
-            const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-                    id: {"in":"path","name":"id","required":true,"dataType":"string"},
-                    args: {"in":"body","name":"args","required":true,"ref":"DocumentUpdate"},
-            };
+            async function DocumentController_copyDoc(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args: argsDocumentController_copyDoc, request, response });
 
                 const controller = new DocumentController();
 
-
-              const promise = controller.copyDoc.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              await templateService.apiHandler({
+                methodName: 'copyDoc',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsDocumentController_updateDoc: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                id: {"in":"path","name":"id","required":true,"dataType":"string"},
+                args: {"in":"body","name":"args","required":true,"ref":"DocumentUpdate"},
+        };
         app.patch('/api/:docType/:id',
             ...(fetchMiddlewares<RequestHandler>(DocumentController)),
             ...(fetchMiddlewares<RequestHandler>(DocumentController.prototype.updateDoc)),
 
-            function DocumentController_updateDoc(request: any, response: any, next: any) {
-            const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-                    id: {"in":"path","name":"id","required":true,"dataType":"string"},
-                    args: {"in":"body","name":"args","required":true,"ref":"DocumentUpdate"},
-            };
+            async function DocumentController_updateDoc(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args: argsDocumentController_updateDoc, request, response });
 
                 const controller = new DocumentController();
 
-
-              const promise = controller.updateDoc.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              await templateService.apiHandler({
+                methodName: 'updateDoc',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsDocumentController_deleteDoc: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                id: {"in":"path","name":"id","required":true,"dataType":"string"},
+        };
         app.delete('/api/:docType/:id',
             ...(fetchMiddlewares<RequestHandler>(DocumentController)),
             ...(fetchMiddlewares<RequestHandler>(DocumentController.prototype.deleteDoc)),
 
-            function DocumentController_deleteDoc(request: any, response: any, next: any) {
-            const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-                    id: {"in":"path","name":"id","required":true,"dataType":"string"},
-            };
+            async function DocumentController_deleteDoc(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args: argsDocumentController_deleteDoc, request, response });
 
                 const controller = new DocumentController();
 
-
-              const promise = controller.deleteDoc.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              await templateService.apiHandler({
+                methodName: 'deleteDoc',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsDocumentController_addComment: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                id: {"in":"path","name":"id","required":true,"dataType":"string"},
+                args: {"in":"body","name":"args","required":true,"ref":"CommentCreate"},
+        };
         app.post('/api/:docType/:id/comment',
             ...(fetchMiddlewares<RequestHandler>(DocumentController)),
             ...(fetchMiddlewares<RequestHandler>(DocumentController.prototype.addComment)),
 
-            function DocumentController_addComment(request: any, response: any, next: any) {
-            const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-                    id: {"in":"path","name":"id","required":true,"dataType":"string"},
-                    args: {"in":"body","name":"args","required":true,"ref":"CommentCreate"},
-            };
+            async function DocumentController_addComment(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args: argsDocumentController_addComment, request, response });
 
                 const controller = new DocumentController();
 
-
-              const promise = controller.addComment.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              await templateService.apiHandler({
+                methodName: 'addComment',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsDocumentController_getComment: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                id: {"in":"path","name":"id","required":true,"dataType":"string"},
+                cid: {"in":"path","name":"cid","required":true,"dataType":"string"},
+        };
         app.get('/api/:docType/:id/comment/:cid',
             ...(fetchMiddlewares<RequestHandler>(DocumentController)),
             ...(fetchMiddlewares<RequestHandler>(DocumentController.prototype.getComment)),
 
-            function DocumentController_getComment(request: any, response: any, next: any) {
-            const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-                    id: {"in":"path","name":"id","required":true,"dataType":"string"},
-                    cid: {"in":"path","name":"cid","required":true,"dataType":"string"},
-            };
+            async function DocumentController_getComment(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args: argsDocumentController_getComment, request, response });
 
                 const controller = new DocumentController();
 
-
-              const promise = controller.getComment.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              await templateService.apiHandler({
+                methodName: 'getComment',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsDocumentController_updateComment: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                id: {"in":"path","name":"id","required":true,"dataType":"string"},
+                cid: {"in":"path","name":"cid","required":true,"dataType":"string"},
+                args: {"in":"body","name":"args","required":true,"ref":"CommentUpdate"},
+        };
         app.patch('/api/:docType/:id/comment/:cid',
             ...(fetchMiddlewares<RequestHandler>(DocumentController)),
             ...(fetchMiddlewares<RequestHandler>(DocumentController.prototype.updateComment)),
 
-            function DocumentController_updateComment(request: any, response: any, next: any) {
-            const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-                    id: {"in":"path","name":"id","required":true,"dataType":"string"},
-                    cid: {"in":"path","name":"cid","required":true,"dataType":"string"},
-                    args: {"in":"body","name":"args","required":true,"ref":"CommentUpdate"},
-            };
+            async function DocumentController_updateComment(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args: argsDocumentController_updateComment, request, response });
 
                 const controller = new DocumentController();
 
-
-              const promise = controller.updateComment.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              await templateService.apiHandler({
+                methodName: 'updateComment',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsDocumentController_deleteComment: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                id: {"in":"path","name":"id","required":true,"dataType":"string"},
+                cid: {"in":"path","name":"cid","required":true,"dataType":"string"},
+        };
         app.delete('/api/:docType/:id/comment/:cid',
             ...(fetchMiddlewares<RequestHandler>(DocumentController)),
             ...(fetchMiddlewares<RequestHandler>(DocumentController.prototype.deleteComment)),
 
-            function DocumentController_deleteComment(request: any, response: any, next: any) {
-            const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-                    id: {"in":"path","name":"id","required":true,"dataType":"string"},
-                    cid: {"in":"path","name":"cid","required":true,"dataType":"string"},
-            };
+            async function DocumentController_deleteComment(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args: argsDocumentController_deleteComment, request, response });
 
                 const controller = new DocumentController();
 
-
-              const promise = controller.deleteComment.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              await templateService.apiHandler({
+                methodName: 'deleteComment',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsDocumentController_getAttachments: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+        };
         app.get('/api/docs/attachments',
             ...(fetchMiddlewares<RequestHandler>(DocumentController)),
             ...(fetchMiddlewares<RequestHandler>(DocumentController.prototype.getAttachments)),
 
-            function DocumentController_getAttachments(request: any, response: any, next: any) {
-            const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-            };
+            async function DocumentController_getAttachments(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args: argsDocumentController_getAttachments, request, response });
 
                 const controller = new DocumentController();
 
-
-              const promise = controller.getAttachments.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              await templateService.apiHandler({
+                methodName: 'getAttachments',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsDocumentController_getDocAttachments: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                docId: {"in":"path","name":"docId","required":true,"dataType":"string"},
+        };
         app.get('/api/docs/:docId/attachments',
             ...(fetchMiddlewares<RequestHandler>(DocumentController)),
             ...(fetchMiddlewares<RequestHandler>(DocumentController.prototype.getDocAttachments)),
 
-            function DocumentController_getDocAttachments(request: any, response: any, next: any) {
-            const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-                    docId: {"in":"path","name":"docId","required":true,"dataType":"string"},
-            };
+            async function DocumentController_getDocAttachments(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args: argsDocumentController_getDocAttachments, request, response });
 
                 const controller = new DocumentController();
 
-
-              const promise = controller.getDocAttachments.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              await templateService.apiHandler({
+                methodName: 'getDocAttachments',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsDocumentController_getDocAttachment: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                docId: {"in":"path","name":"docId","required":true,"dataType":"string"},
+                attachmentId: {"in":"path","name":"attachmentId","required":true,"dataType":"string"},
+        };
         app.get('/api/docs/:docId/attachments/:attachmentId',
             ...(fetchMiddlewares<RequestHandler>(DocumentController)),
             ...(fetchMiddlewares<RequestHandler>(DocumentController.prototype.getDocAttachment)),
 
-            function DocumentController_getDocAttachment(request: any, response: any, next: any) {
-            const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-                    docId: {"in":"path","name":"docId","required":true,"dataType":"string"},
-                    attachmentId: {"in":"path","name":"attachmentId","required":true,"dataType":"string"},
-            };
+            async function DocumentController_getDocAttachment(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args: argsDocumentController_getDocAttachment, request, response });
 
                 const controller = new DocumentController();
 
-
-              const promise = controller.getDocAttachment.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              await templateService.apiHandler({
+                methodName: 'getDocAttachment',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsDocumentController_deleteDocAttachments: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                docId: {"in":"path","name":"docId","required":true,"dataType":"string"},
+                attachmentId: {"in":"path","name":"attachmentId","required":true,"dataType":"string"},
+        };
         app.delete('/api/docs/:docId/attachments/:attachmentId',
             ...(fetchMiddlewares<RequestHandler>(DocumentController)),
             ...(fetchMiddlewares<RequestHandler>(DocumentController.prototype.deleteDocAttachments)),
 
-            function DocumentController_deleteDocAttachments(request: any, response: any, next: any) {
-            const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-                    docId: {"in":"path","name":"docId","required":true,"dataType":"string"},
-                    attachmentId: {"in":"path","name":"attachmentId","required":true,"dataType":"string"},
-            };
+            async function DocumentController_deleteDocAttachments(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args: argsDocumentController_deleteDocAttachments, request, response });
 
                 const controller = new DocumentController();
 
-
-              const promise = controller.deleteDocAttachments.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              await templateService.apiHandler({
+                methodName: 'deleteDocAttachments',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsDocumentController_createDocAttachments: Record<string, TsoaRoute.ParameterSchema> = {
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+                docId: {"in":"path","name":"docId","required":true,"dataType":"string"},
+                file: {"in":"formData","name":"file","required":true,"dataType":"file"},
+        };
         app.post('/api/docs/:docId/attachments',
-            upload.single('file'),
+            upload.fields([
+                {
+                    name: "file",
+                    maxCount: 1
+                }
+            ]),
             ...(fetchMiddlewares<RequestHandler>(DocumentController)),
             ...(fetchMiddlewares<RequestHandler>(DocumentController.prototype.createDocAttachments)),
 
-            function DocumentController_createDocAttachments(request: any, response: any, next: any) {
-            const args = {
-                    req: {"in":"request","name":"req","required":true,"dataType":"object"},
-                    docId: {"in":"path","name":"docId","required":true,"dataType":"string"},
-                    file: {"in":"formData","name":"file","required":true,"dataType":"file"},
-            };
+            async function DocumentController_createDocAttachments(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = getValidatedArgs(args, request, response);
+                validatedArgs = templateService.getValidatedArgs({ args: argsDocumentController_createDocAttachments, request, response });
 
                 const controller = new DocumentController();
 
-
-              const promise = controller.createDocAttachments.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
+              await templateService.apiHandler({
+                methodName: 'createDocAttachments',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
             } catch (err) {
                 return next(err);
             }
@@ -781,96 +887,6 @@ export function RegisterRoutes(app: Router) {
 
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
-
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-    function isController(object: any): object is Controller {
-        return 'getHeaders' in object && 'getStatus' in object && 'setStatus' in object;
-    }
-
-    function promiseHandler(controllerObj: any, promise: any, response: any, successStatus: any, next: any) {
-        return Promise.resolve(promise)
-            .then((data: any) => {
-                let statusCode = successStatus;
-                let headers;
-                if (isController(controllerObj)) {
-                    headers = controllerObj.getHeaders();
-                    statusCode = controllerObj.getStatus() || statusCode;
-                }
-
-                // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-                returnHandler(response, statusCode, data, headers)
-            })
-            .catch((error: any) => next(error));
-    }
-
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-    function returnHandler(response: any, statusCode?: number, data?: any, headers: any = {}) {
-        if (response.headersSent) {
-            return;
-        }
-        Object.keys(headers).forEach((name: string) => {
-            response.set(name, headers[name]);
-        });
-        if (data && typeof data.pipe === 'function' && data.readable && typeof data._read === 'function') {
-            response.status(statusCode || 200)
-            data.pipe(response);
-        } else if (data !== null && data !== undefined) {
-            response.status(statusCode || 200).json(data);
-        } else {
-            response.status(statusCode || 204).end();
-        }
-    }
-
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-    function responder(response: any): TsoaResponse<HttpStatusCodeLiteral, unknown>  {
-        return function(status, data, headers) {
-            returnHandler(response, status, data, headers);
-        };
-    };
-
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-    function getValidatedArgs(args: any, request: any, response: any): any[] {
-        const fieldErrors: FieldErrors  = {};
-        const values = Object.keys(args).map((key) => {
-            const name = args[key].name;
-            switch (args[key].in) {
-                case 'request':
-                    return request;
-                case 'query':
-                    return validationService.ValidateParam(args[key], request.query[name], name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                case 'queries':
-                    return validationService.ValidateParam(args[key], request.query, name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                case 'path':
-                    return validationService.ValidateParam(args[key], request.params[name], name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                case 'header':
-                    return validationService.ValidateParam(args[key], request.header(name), name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                case 'body':
-                    return validationService.ValidateParam(args[key], request.body, name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                case 'body-prop':
-                    return validationService.ValidateParam(args[key], request.body[name], name, fieldErrors, 'body.', {"noImplicitAdditionalProperties":"throw-on-extras"});
-                case 'formData':
-                    if (args[key].dataType === 'file') {
-                        return validationService.ValidateParam(args[key], request.file, name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                    } else if (args[key].dataType === 'array' && args[key].array.dataType === 'file') {
-                        return validationService.ValidateParam(args[key], request.files, name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                    } else {
-                        return validationService.ValidateParam(args[key], request.body[name], name, fieldErrors, undefined, {"noImplicitAdditionalProperties":"throw-on-extras"});
-                    }
-                case 'res':
-                    return responder(response);
-            }
-        });
-
-        if (Object.keys(fieldErrors).length > 0) {
-            throw new ValidateError(fieldErrors, '');
-        }
-        return values;
-    }
 
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 }

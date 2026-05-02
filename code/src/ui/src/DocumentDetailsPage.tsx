@@ -1279,41 +1279,36 @@ const DocumentDetailsPage: React.FC<Props> = ({ context }) => {
                                     </div>
                                 )}
                                 {!show_checklist_switch && (
-                                        <div className="spacer" />
-                                    ) && (
-                                        <div className="checklist-buttons">
-                                            <ActionButtons
-                                                document={aDocument}
-                                                setDocument={setDocument}
-                                                context={context}
-                                                enabled={enableSubmit(
-                                                    aDocument
-                                                )}
-                                                tab="checklist"
-                                            />
-                                        </div>
-                                    )}
-                                {show_comments_section_switch && (
-                                        <div className="spacer" />
-                                    ) && (
-                                        <div
-                                            className="slate"
-                                            style={{
-                                                padding: 'var(--spacing-2)',
-                                            }}
-                                        >
-                                            COMMENTS
-                                        </div>
-                                    ) && <div className="spacer" /> && (
-                                        <div className="detailDiv">
-                                            <Comments
-                                                context={context}
-                                                document={aDocument}
-                                                setDocument={setDocument}
-                                                topic="Team Outing"
-                                            />
-                                        </div>
-                                    )}
+                                    <div className="checklist-buttons spacer">
+                                        <ActionButtons
+                                            document={aDocument}
+                                            setDocument={setDocument}
+                                            context={context}
+                                            enabled={enableSubmit(
+                                                aDocument
+                                            )}
+                                            tab="checklist"
+                                        />
+                                    </div>
+                                )}
+                                {show_comments_section_switch && (<div className="spacer">
+                                    <div
+                                        className="slate"
+                                        style={{
+                                            padding: 'var(--spacing-2)',
+                                        }}
+                                    >
+                                        COMMENTS
+                                    </div>
+                                    <div className="spacer detailDiv">
+                                        <Comments
+                                            context={context}
+                                            document={aDocument}
+                                            setDocument={setDocument}
+                                            topic="Team Outing"
+                                        />
+                                    </div>
+                                </div>)}
                             </div>
 
                             <div

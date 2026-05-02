@@ -50,7 +50,14 @@ export class AppMgr extends DocMgr {
         super({
             appName: docType,
             documents: {
-                [docType]: { states: docStates, docRoles: Role },
+                [docType]: { 
+                    states: docStates, 
+                    docRoles: Role,
+                    includeComments: true,
+                    includeDateCreated: true,
+                    includeDateUpdated: true,
+                    includeStateHistory: true,
+                },
             },
             adminGroups: [GROUP_ADMIN],
             email: 'admin@test.com',

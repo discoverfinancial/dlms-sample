@@ -5,7 +5,6 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
 import { CommentInfo, DocumentInfo, formatDateTime } from '../common/common';
 import { AppContext } from '../common/states';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import {
     EditorState,
     ContentState,
@@ -325,7 +324,7 @@ const Comments: React.FC<Props> = ({
 
     return (
         <div>
-            {document.comments.length > 0 && (
+            {document?.comments?.length > 0 && (
                 <>
                     {document.comments.map((comment: any, i) => {
                         if (
@@ -435,8 +434,6 @@ const Comments: React.FC<Props> = ({
                     })}
                 </>
             )}
-
-            {document.comments.length === 0 && <div>None</div>}
 
             <div ref={commentEditorContainer}>
                 <div

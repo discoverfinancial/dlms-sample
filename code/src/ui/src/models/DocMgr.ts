@@ -618,7 +618,7 @@ export class DocMgr
 
         let url = `/api/docs/${docType}/${documentId}/attachments/`;
         try {
-            const response = await this.http.post(url, formData, {
+            const response = await this.http.put(url, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
             console.log('uploadAttachment response=', response);

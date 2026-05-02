@@ -132,6 +132,30 @@ export class Http {
         }
     }
 
+    public async put(
+        url: string,
+        data?: any,
+        config?: AxiosRequestConfig<any>
+    ): Promise<AxiosResponse<any, any>> {
+        console.log(`put(${url})`);
+        let _url = url;
+        if (!url.startsWith('http')) {
+            _url = this.baseUrl + url;
+        }
+        let c: any = config
+            ? config
+            : { headers: { 'Content-type': 'application/json' } };
+        if (this.auth) {
+            c = { ...c, auth: this.auth };
+        }
+        try {
+            const response = await axios.put(_url, data, c);
+            return response;
+        } catch (e) {
+            throw e;
+        }
+    }
+    
     public async patch(
         url: string,
         data?: any,
