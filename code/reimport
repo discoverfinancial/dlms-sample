@@ -3,10 +3,10 @@
 npm uninstall dlms-server dlms-base
 
 # Install modules
-cp ../../dlms-server/server/dlms-base-1.0.7.tgz .
-cp ../../dlms-server/server/dlms-server-1.0.7.tgz .
-npm install dlms-base-1.0.7.tgz
-npm install dlms-server-1.0.7.tgz
+cp ../../dlms-server/server/dlms-base-2.0.2.tgz .
+cp ../../dlms-server/server/dlms-server-2.0.2.tgz .
+npm install dlms-base-2.0.2.tgz
+npm install dlms-server-2.0.2.tgz
 
 cd src/ui
 ./reimport
