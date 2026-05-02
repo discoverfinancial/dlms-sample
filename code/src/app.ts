@@ -102,7 +102,7 @@ async function addCustomRoutes(app: express.Application) {
         }
 
         app.get(
-            '/*',
+            '/{*any}',
             async function (
                 _req: express.Request,
                 res: express.Response,
@@ -158,7 +158,7 @@ async function addCustomRoutes(app: express.Application) {
         }
         log.debug('dirname=', dirname);
         app.use(express.static(path.join(dirname, 'ui/build')));
-        app.get('/*', function (_req: express.Request, res: express.Response) {
+        app.get('/{*any}', function (_req: express.Request, res: express.Response) {
             res.sendFile(path.join(dirname, 'ui/build', 'index.html'));
         });
     }
